@@ -73,21 +73,46 @@ export class CursoService {
   }
 
   //aca usaremos el map el pipe y su metodo map para filtrar un curso
-  obtenerCurso(id: number): Observable<Curso[]>{
+  obtenerCurso(id: number): Observable<Curso[]> {
     return this.obtenerCursos().pipe(
       map((cursos: Curso[]) => cursos.filter((curso: Curso) => curso.id === id))
     )
   }
 
-  agregarCurso(curso: Curso){
+  agregarCurso(curso: Curso) {
     this.cursos.push(curso);
     this.cursosSubject.next(this.cursos);
 
   }
 
-  editarCurso(curso: Curso){}
+  editarCurso(curso: Curso) {
+    //vamos a buscar en nuestro arreglo una variable con index q en este caso sera id
+    let indice = this.cursos.findIndex((c: Curso) => c.id === curso.id)
 
-  eliminarCurso(id: number){}
+    //veremos si se encuentra algun ele en arreglo que empiezan desde 0
+
+    if (indice > -1) {
+      this.cursos[indice] = curso;
+    }
+    this.cursosSubject.next(this.cursos);
+
+  }
+
+  eliminarCurso(id: number) { 
+
+    let indice = this.cursos.findIndex((c: Curso) => c.id === id)
+
+    //veremos si se encuentra algun ele en arreglo que empiezan desde 0
+
+    if (indice > -1) {
+      this.cursos.slice(indice, 1);
+    }
+    this.cursosSubject.next(this.cursos);
+
+
+
+
+  }
 
 
 }

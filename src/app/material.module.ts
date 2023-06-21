@@ -10,8 +10,6 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import { MatNativeDateModule } from '@angular/material/core';
 
 
-
-
 @NgModule({
     imports: [
         MatToolbarModule,
